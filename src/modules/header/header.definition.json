@@ -1,0 +1,242 @@
+{
+	"$type": "containerModule",
+	"friendlyName": "Header (COPY)",
+	"name": "header",
+	"description": " Header is shown on the top of the page and allows the user to browse products via navigation hierarchy. It also support links to specific pages in the site that author wants to promote.",
+	"categories": [
+		"Header"
+	],
+	"dataActions": {
+		"cart": {
+			"path": "@msdyn365-commerce/global-state/dist/lib/data-actions/get-cart-state-data-action",
+			"runOn": "client"
+		},
+		"employee": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-employee"
+		},
+		"accountInformation": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-customer"
+		},
+		"storeSelectorStateManager": {
+			"path": "@msdyn365-commerce-modules/bopis-utilities/dist/lib/store-selector-state-manager/store-selector-state-manager-data-action",
+			"runOn": "client"
+		},
+		"wishlists": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-wishlist-by-customer-id",
+			"runOn": "server"
+		}
+	},
+	"config": {
+		"logoImage": {
+			"friendlyName": "Logo image",
+			"description": "Logo image",
+			"type": "image",
+			"required": true
+		},
+		"logoLink": {
+			"friendlyName": "Logo link",
+			"description": "Logo link",
+			"$ref": "@msdyn365-commerce-modules/definitions/dist/src/ActionLink.json#/definitions/actionLink"
+		},
+		"myAccountLinks": {
+			"friendlyName": "My account links",
+			"description": "Link to the my account page",
+			"type": "array",
+			"items": {
+				"$ref": "@msdyn365-commerce-modules/definitions/dist/src/ActionLink.json#/definitions/actionLink"
+			}
+		},
+		"className": {
+			"friendlyName": "Custom CSS class name",
+			"description": "Provide a custom css class name defined in the theme pack to target the CSS for this module",
+			"type": "string",
+			"default": ""
+		},
+		"signUpCustomerNotFound": {
+			"friendlyName": "Error message if customer not found",
+			"description": "Sign-up error message if customer not found",
+			"type": "string",
+			"required": false,
+			"default": "Your sign-up was successful, but your business user record has not yet been approved. Please try signing in at a later time or you may sign in once instructed your account has been approved."
+		},
+		"signUpMultipleCustomerFound": {
+			"friendlyName": "Multiple customers found error msg",
+			"description": "Sign-up error message when multiple customer found with same email address.",
+			"type": "string",
+			"required": false,
+			"default": "Your sign-up was successful, but there is an issue associating to the business user account. Please try signing in at a later time."
+		},
+		"signInCustomerNotAuthorized": {
+			"friendlyName": "Error message if customer not authorized",
+			"description": "Sign-in error message if customer not authorized",
+			"type": "string",
+			"required": false,
+			"default": "Your sign-in was successful, but your account is not authorized to current channel. Please contact your system administrator."
+		},
+		"shouldShowWishlistCount": {
+			"friendlyName": "Show wishlist item count",
+			"description": "If set to true, will show count of wishlist item with icon",
+			"type": "boolean",
+			"default": false,
+			"scope": "module"
+		},
+		"clientRender": {
+			"friendlyName": "Render module client side",
+			"description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"resources": {
+		"mobileHamburgerAriaLabel": {
+			"comment": "The aria label used for mobile view hamburger",
+			"value": "Hamburger menu"
+		},
+		"wishlistTooltipText": {
+			"comment": "string to be shown for wishlist tooltip",
+			"value": "My Wishlist"
+		},
+		"cartLabel": {
+			"comment": "string to be shown for cart or shopping bag tooltip",
+			"value": "Shopping bag, ({0}) items"
+		},
+		"cartQtyLabel": {
+			"comment": "string to be shown for cart item quantity",
+			"value": "({0})"
+		},
+		"signInLinkText": {
+			"value": "Sign in",
+			"comment": "Sign-in Link text"
+		},
+		"signInLinkAriaText": {
+			"value": "Sign in",
+			"comment": "Sign-in Link aria text"
+		},
+		"signOutLinkText": {
+			"value": "Sign out",
+			"comment": "Sign-out in Link aria text"
+		},
+		"signOutLinkAriaText": {
+			"value": "Sign out",
+			"comment": "Sign-out in Link aria text"
+		},
+		"shoppingAsText": {
+			"value": "For {0}",
+			"comment": "shop on behalf of customer. {0} is placeholder of customer name."
+		},
+		"switchCustomerLinkText": {
+			"value": "Switch customer",
+			"comment": "Switch customer in Link text"
+		},
+		"switchCustomerLinkAriaText": {
+			"value": "Switch customer",
+			"comment": "Switch customer in Link aria text"
+		},
+		"headerPreferredStoreText": {
+			"value": "Store locator",
+			"comment": "Store locator text"
+		},
+		"headerPreferredStoreAriaLabel": {
+			"value": "Store locator",
+			"comment": "Store locator aria label"
+		},
+		"signUpCustomerNotFoundTitle": {
+			"value": "Your sign-up was successful, but your business user record has not yet been approved. Please try signing in at a later time or you may sign in once instructed your account has been approved.",
+			"comment": "Error message if customer not found"
+		},
+		"signInCustomerNotAuthorizedTitle": {
+			"value": "Your sign-in was successful, but your account is not authorized to current channel. Please contact your system administrator.",
+			"comment": "Error message if customer not authorized"
+		},
+		"signUpMultipleCustomerFoundTitle": {
+			"value": "Your sign-up was successful, but there is an issue associating to the business user account. Please try signing in at a later time.",
+			"comment": "Multiple customers found error msg"
+		},
+		"closeNotificationLabel": {
+			"value": "Close",
+			"comment": "Aria Label for close button of notification"
+		},
+		"wishlistCountLabel": {
+			"comment": "string to be shown for wishlist count",
+			"value": "({0})"
+		},
+		"headerAriaLabel": {
+			"comment": "Aria label for header",
+			"value": "Header"
+		}
+	},
+	"slots": {
+		"menuBar": {
+			"friendlyName": "Navigation menu",
+			"description": "Slot for Navigation menu in header handling",
+			"allowedTypes": [
+				"navigation-menu"
+			],
+			"allowedCategories": [
+				"header_menuBar"
+			],
+			"min": 0,
+			"max": 1
+		},
+		"search": {
+			"friendlyName": "Search",
+			"description": "Slot for Search in header handling",
+			"max": 1,
+			"min": 0,
+			"allowedTypes": [
+				"search"
+			],
+			"allowedCategories": [
+				"header_search"
+			]
+		},
+		"cartIcon": {
+			"friendlyName": "Cart icon",
+			"description": "Slot for Cart Icon module in header handling",
+			"max": 1,
+			"min": 0,
+			"allowedTypes": [
+				"cart-icon"
+			],
+			"allowedCategories": [
+				"header_cartIcon"
+			]
+		},
+		"siteOptions": {
+			"friendlyName": "Site picker",
+			"description": "Slot for Site Picker",
+			"max": 1,
+			"min": 0,
+			"allowedTypes": [
+				"site-picker"
+			],
+			"allowedCategories": [
+				"header_siteOptions"
+			]
+		},
+		"storeSelector": {
+			"friendlyName": "Store selector",
+			"description": "Store Selector to use with the Find in Store component",
+			"max": 1,
+			"min": 0,
+			"allowedTypes": [
+				"store-selector"
+			],
+			"allowedCategories": [
+				"header_storeSelector"
+			]
+		},
+		"distributorSelector": {
+			"friendlyName": "Distributor selector",
+			"description": "Distributor Selector to select preferred distributor",
+			"max": 1,
+			"min": 0,
+			"allowedTypes": [
+				"distributor-selector"
+			],
+			"allowedCategories": [
+				"header_distributorSelector"
+			]
+		}
+	}
+}

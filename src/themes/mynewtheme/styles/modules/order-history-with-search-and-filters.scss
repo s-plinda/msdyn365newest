@@ -1,0 +1,322 @@
+@import "../common/00-settings/colors";
+@import "../common/00-settings/font";
+@import "../common/00-settings/icons";
+@import "../common/00-settings/responsive-breakpoints";
+@import "../common/02-generic/button";
+@import "../common/02-generic/image";
+
+$account-links-max-width: 276px;
+$popover-menu-item-height: 48px;
+
+$msv-order-history-with-search-and-filters-padding-bottom: 28px;
+$msv-order-history-with-search-and-filters-sales-order-padding-top: 40px;
+$msv-order-history-with-search-and-filters-sales-order-padding-bottom: 40px;
+$msv-order-history-with-search-and-filters-order-information-sales-id-padding-right: 5px;
+$msv-order-history-with-search-and-filters-order-information-receipt-id-padding-right: 5px;
+$msv-details-order-information-channel-name-margin-bottom: 4px;
+$msv-order-history-with-search-and-filters-sales-lines-margin-top: 8px;
+$msv-order-history-with-search-and-filters-sales-line-picture-margin-right: 12px;
+$msv-order-history-with-search-and-filters-sales-line-picture-margin-top: 12px;
+$msv-order-history-with-search-and-filters-sales-line-picture-width: 81px;
+$msv-order-history-with-search-and-filters-sales-line-picture-height: 81px;
+$msv-order-history-with-search-and-filters-empty-image-width: 81px;
+$msv-order-history-with-search-and-filters-btn-order-details-margin-top: 20px;
+$msv-order-history-with-search-and-filters-order-information-channel-name-padding-right: 5px;
+$msv-order-history-with-search-and-filters-order-information-created-date-padding-right: 5px;
+$msv-order-history-with-search-and-filters-order-information-created-date-padding-left: 5px;
+$msv-order-history-with-search-and-filters-order-information-count-padding-right: 0;
+$msv-order-history-with-search-and-filters-order-information-count-padding-left: 5px;
+$msv-order-history-with-search-and-filters-order-information-amount-padding-left: 5px;
+$msv-order-history-with-search-and-filters-table-placed-by-row-width: 160px;
+$msv-container-padding-left: 60px;
+$msv-container-padding-right: 60px;
+$msv-container-width: 100%;
+$msv-order-history-with-search-and-filters-group-delivery-heading-margin-right: 3px;
+$msv-order-history-with-search-and-filters-btn-keep-shopping-margin-top: 20px;
+$msv-order-history-with-search-and-filters-btn-keep-shopping-margin-bottom: 20px;
+$msv-order-history-with-search-and-filters-btn-more-margin-top: 20px;
+$msv-order-history-with-search-and-filters-alert-margin-top: 20px;
+$msv-order-history-with-search-and-filters-alert-margin-bottom: 20px;
+$msv-order-information-placed-by-margin-bottom: 12px;
+
+// order-history-with-search-and-filters-header
+$msv-order-history-with-search-and-filters-header-padding-bottom: 20px;
+$msv-order-history-with-search-and-filters-header-heading-margin-bottom: 8px;
+$msv-order-history-with-search-and-filters-header-order-count-margin-left: 5px;
+
+//style presets
+:root {
+    --msv-order-history-with-search-and-filters-border: #{$msv-gray-300};
+
+    // header
+    --msv-order-history-with-search-and-filters-heading-font-color: var(--msv-font-primary-color);
+    --msv-order-history-with-search-and-filters-heading-font-size: var(--msv-body-font-size-xl);
+
+    // title
+    --msv-order-history-with-search-and-filters-title-font-color: var(--msv-font-primary-color);
+    --msv-order-history-with-search-and-filters-title-font-size: var(--msv-body-font-size-l);
+
+    // text
+    --msv-order-history-with-search-and-filters-text-font-color: var(--msv-font-primary-color);
+    --msv-order-history-with-search-and-filters-text-font-size: var(--msv-body-font-size-m);
+
+    // secondary button
+    --msv-order-history-with-search-and-filters-secondary-btn-bg: var(--msv-secondary-button-background-color);
+    --msv-order-history-with-search-and-filters-secondary-btn-font-color: var(--msv-font-primary-color);
+    --msv-order-history-with-search-and-filters-secondary-btn-border: var(--msv-accent-brand-color);
+
+    // view mode
+    --msv-order-history-with-search-and-filters-orders-view-mode-button-selected-background: var(--msv-selected-button-background);
+    --msv-order-history-with-search-and-filters-orders-view-mode-button-selected-hovered-background: var(--msv-selected-hovered-button-background);
+}
+
+.ms-order-history-with-search-and-filters {
+    padding-bottom: $msv-order-history-with-search-and-filters-padding-bottom;
+
+    // order-history-with-search-and-filters-header
+    .ms-order-history-with-search-and-filters-header {
+        padding-bottom: $msv-order-history-with-search-and-filters-header-padding-bottom;
+        border-bottom: 1px solid var(--msv-order-history-with-search-and-filters-border);
+        display: flex;
+        flex-wrap: wrap;
+
+        &__heading {
+            @include font-content(
+                $font-weight: var(--msv-font-weight-normal),
+                $font-size: var(--msv-order-history-with-search-and-filters-heading-font-size),
+                $line-height: $msv-line-height-xl
+            );
+            color: var(--msv-order-history-with-search-and-filters-heading-font-color);
+            display: inline-block;
+            margin-bottom: $msv-order-history-with-search-and-filters-header-heading-margin-bottom;
+        }
+
+        &__order-count {
+            margin-top: 10px;
+            margin-left: $msv-order-history-with-search-and-filters-header-order-count-margin-left;
+            margin-right: $msv-order-history-with-search-and-filters-header-order-count-margin-left;
+        }
+    }
+
+    // order-history-with-search-and-filters-organization-wide-selector
+    .ms-order-history-with-search-and-filters-organization-wide-selector {
+        &__button {
+            margin-right: 15px;
+
+            @media screen and (max-width: $msv-breakpoint-m) {
+                margin-top: 0;
+                margin-bottom: 10px;
+            }
+
+            @include vfi();
+
+            &:not(:disabled) {
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        &__active-button {
+            @include primary-button();
+        }
+
+        &__inactive-button {
+            @include secondary-button();
+        }
+    }
+
+    // order-history-with-search-and-filters-view-mode-selector
+    .ms-order-history-with-search-and-filters-view-mode-selector {
+        @media screen and (min-width: $msv-breakpoint-m) {
+            border-left: 1px solid var(--msv-order-history-with-search-and-filters-border);
+            margin-left: 12px;
+            padding-left: 12px;
+            float: right;
+        }
+
+        button {
+            cursor: pointer;
+            padding: 0 14px;
+            color: $msv-primary;
+            background: none;
+
+            &:hover,
+            &.ms-order-history-with-search-and-filters-view-mode-selector__selected {
+                background: var(--msv-order-history-with-search-and-filters-orders-view-mode-button-selected-background);
+            }
+
+            &:hover.ms-order-history-with-search-and-filters-view-mode-selector__selected {
+                background-color: var(--msv-order-history-with-search-and-filters-orders-view-mode-button-selected-hovered-background);
+            }
+        }
+
+        &__list-view {
+            @include add-icon($msv-List);
+        }
+
+        &__detailed-view {
+            @include add-icon($msv-TH-Large);
+        }
+    }
+
+    // order-history-with-search-and-filters-order-list
+    .ms-order-history-with-search-and-filters-order-list {
+        &__sales-order {
+            @include font-content-m();
+            padding-top: $msv-order-history-with-search-and-filters-sales-order-padding-top;
+            padding-bottom: $msv-order-history-with-search-and-filters-sales-order-padding-bottom;
+            position: relative;
+            border-bottom: 1px solid var(--msv-order-history-with-search-and-filters-border);
+
+            display: flex;
+            flex-wrap: wrap;
+
+            &__expand-products-button {
+                background-color: unset;
+
+                text-decoration-line: underline;
+                font-size: 16px;
+                line-height: 21px;
+
+                @media screen and (min-width: $msv-breakpoint-m) {
+                    margin-top: 35px;
+                }
+            }
+
+            &__expand-products-button-wrapper {
+                flex-basis: 100%;
+            }
+
+            &-placed-by {
+                margin-bottom: $msv-order-information-placed-by-margin-bottom;
+
+                .bolded {
+                    font-weight: bold;
+                }
+            }
+        }
+
+        &__order-information {
+            flex-basis: 100%;
+
+            &-channel-name {
+                color: var(--msv-order-history-with-search-and-filters-title-font-color);
+                display: inline-block;
+                vertical-align: top;
+                font-size: var(--msv-order-history-with-search-and-filters-title-font-size);
+                line-height: $msv-line-height-l;
+                margin-bottom: $msv-details-order-information-channel-name-margin-bottom;
+                padding-right: $msv-order-history-with-search-and-filters-order-information-channel-name-padding-right;
+            }
+
+            &-sales-id,
+            &-receipt-id,
+            &-channel-reference-id {
+                display: block;
+            }
+
+            &-created-date {
+                padding-right: $msv-order-history-with-search-and-filters-order-information-created-date-padding-right;
+                border-right: 1px solid var(--msv-order-history-with-search-and-filters-border);
+            }
+
+            &-count {
+                display: inline-block;
+                vertical-align: top;
+                padding-right: $msv-order-history-with-search-and-filters-order-information-count-padding-right;
+                padding-left: $msv-order-history-with-search-and-filters-order-information-count-padding-left;
+                border-left: 1px solid var(--msv-order-history-with-search-and-filters-border);
+            }
+
+            &-amount {
+                padding-left: $msv-order-history-with-search-and-filters-order-information-amount-padding-left;
+            }
+
+            &-sales-id,
+            &-receipt-id,
+            &-channel-reference-id,
+            &-created-date,
+            &-count,
+            &-amount {
+                font-size: var(--msv-order-history-with-search-and-filters-text-font-size);
+                color: var(--msv-order-history-with-search-and-filters-text-font-color);
+            }
+        }
+
+        &__sales-lines {
+            margin-top: $msv-order-history-with-search-and-filters-sales-lines-margin-top;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        &__sales-line-picture {
+            margin-right: $msv-order-history-with-search-and-filters-sales-line-picture-margin-right;
+            margin-top: $msv-order-history-with-search-and-filters-sales-line-picture-margin-top;
+            width: $msv-order-history-with-search-and-filters-sales-line-picture-width;
+            height: $msv-order-history-with-search-and-filters-sales-line-picture-height;
+        }
+
+        &__btn-order-details {
+            @include secondary-button(
+                $bg-color: var(--msv-order-history-with-search-and-filters-secondary-btn-bg),
+                $color: var(--msv-order-history-with-search-and-filters-secondary-btn-font-color),
+                $border-color: var(--msv-order-history-with-search-and-filters-secondary-btn-border)
+            );
+            margin-top: $msv-order-history-with-search-and-filters-btn-order-details-margin-top;
+
+            @media screen and (max-width: $msv-breakpoint-m) {
+                position: unset;
+                width: 100%;
+            }
+        }
+
+        &__groups {
+            display: flex;
+        }
+
+        &__group-delivery {
+            display: none;
+        }
+    }
+
+    // order-history-with-search-and-filters-view-order-table
+    .ms-order-history-with-search-and-filters-order-table {
+        &__row__actions {
+            padding-right: 0;
+
+            &.text {
+                text-align: right;
+            }
+        }
+    }
+
+    &__empty-message,
+    &__alert {
+        display: block;
+        margin-top: $msv-order-history-with-search-and-filters-alert-margin-top;
+        margin-bottom: $msv-order-history-with-search-and-filters-alert-margin-bottom;
+    }
+
+    @include image($msv-order-history-with-search-and-filters-empty-image-width);
+
+    &__btn-keep-shopping {
+        margin-top: $msv-order-history-with-search-and-filters-btn-keep-shopping-margin-top;
+
+        @include primary-button();
+
+        @media screen and (max-width: $msv-breakpoint-m) {
+            width: 100%;
+        }
+    }
+
+    &__btn-more {
+        &.is-busy {
+            @include add-spinner(before);
+        }
+
+        margin-top: $msv-order-history-with-search-and-filters-btn-more-margin-top;
+
+        @include primary-button();
+    }
+}

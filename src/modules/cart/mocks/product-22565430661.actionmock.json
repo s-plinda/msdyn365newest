@@ -1,0 +1,43 @@
+{
+    "CacheObjectType": "SIMPLEPRODUCT",
+    "CacheKey": "RECORDID-22565430661-CHANID:5637145359-CATID:0",
+    "Mock": {
+        "__mock": true,
+        "RecordId": 22565430661,
+        "ItemId": "81314",
+        "Name": "Product 3",
+        "Description": "Description of the item.",
+        "ProductTypeValue": 4,
+        "DefaultUnitOfMeasure": "ea",
+        "BasePrice": 65,
+        "Price": 65,
+        "AdjustedPrice": 65,
+        "MasterProductId": null,
+        "Components": [],
+        "Dimensions": [],
+        "Behavior": {
+            "HasSerialNumber": false,
+            "IsDiscountAllowed": true,
+            "IsManualDiscountAllowed": true,
+            "IsKitDisassemblyAllowed": false,
+            "IsNegativeQuantityAllowed": false,
+            "IsReturnAllowed": true,
+            "IsSaleAtPhysicalStoresAllowed": true,
+            "IsZeroSalePriceAllowed": false,
+            "KeyInPriceValue": 0,
+            "KeyInQuantityValue": 0,
+            "MustKeyInComment": false,
+            "MustPrintIndividualShelfLabelsForVariants": false,
+            "MustPromptForSerialNumberOnlyAtSale": false,
+            "MustWeighProductAtSale": false,
+            "ValidFromDateForSaleAtPhysicalStores": "1900-01-01T00:00:00Z",
+            "ValidToDateForSaleAtPhysicalStores": "2154-12-31T00:00:00Z",
+            "IsBlankSerialNumberAllowed": false,
+            "ExtensionProperties": []
+        },
+        "LinkedProducts": [],
+        "PrimaryImageUrl": "https://test/Products/2101_000_001.png",
+        "ItemTypeValue": 0,
+        "ExtensionProperties": []
+    }
+}

@@ -1,0 +1,283 @@
+{
+    "data": {
+        "heading": {
+            "text": "Component Heading"
+        },
+        "isTransparent": true,
+        "categories": [
+            {
+                "Name": "Link1",
+                "NameTranslations": [
+                    {
+                        "Language": "en-us",
+                        "Text": "Fashion Accessories"
+                    }
+                ],
+                "Children": [
+                    {
+                        "RecordId": "1",
+                        "Children": [],
+                        "NameTranslations": [
+                            {
+                                "Language": "en-us",
+                                "Text": "E2E"
+                            }
+                        ]
+                    },
+                    {
+                        "RecordId": "2",
+                        "Children": [],
+                        "NameTranslations": [
+                            {
+                                "Language": "en-us",
+                                "Text": "Fashion Sunglasses"
+                            }
+                        ]
+                    },
+                    {
+                        "RecordId": "3",
+                        "Children": [],
+                        "NameTranslations": [
+                            {
+                                "Language": "en-us",
+                                "Text": "Gloves & Scarves"
+                            }
+                        ]
+                    },
+                    {
+                        "RecordId": "4",
+                        "Children": [],
+                        "NameTranslations": [
+                            {
+                                "Language": "en-us",
+                                "Text": "Handbags"
+                            }
+                        ]
+                    },
+                    {
+                        "RecordId": "5",
+                        "Children": [],
+                        "NameTranslations": [
+                            {
+                                "Language": "en-us",
+                                "Text": "Jewelery"
+                            }
+                        ]
+                    },
+                    {
+                        "RecordId": "6",
+                        "Children": [],
+                        "NameTranslations": [
+                            {
+                                "Language": "en-us",
+                                "Text": "Watches"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "NameTranslations": [
+                    {
+                        "Language": "en-us",
+                        "Text": "Mens Wear"
+                    }
+                ],
+                "Children": [
+                    {
+                        "RecordId": "1",
+                        "Children": [],
+                        "NameTranslations": [
+                            {
+                                "Language": "en-us",
+                                "Text": "Casual Shirts"
+                            }
+                        ]
+                    },
+                    {
+                        "RecordId": "2",
+                        "Children": [],
+                        "NameTranslations": [
+                            {
+                                "Language": "en-us",
+                                "Text": "Coats & Jackets"
+                            }
+                        ]
+                    },
+                    {
+                        "RecordId": "3",
+                        "Children": [],
+                        "NameTranslations": [
+                            {
+                                "Language": "en-us",
+                                "Text": "Dress Shirts"
+                            }
+                        ]
+                    },
+                    {
+                        "RecordId": "4",
+                        "Children": [],
+                        "NameTranslations": [
+                            {
+                                "Language": "en-us",
+                                "Text": "Hats"
+                            }
+                        ]
+                    },
+                    {
+                        "RecordId": "5",
+                        "Children": [],
+                        "NameTranslations": [
+                            {
+                                "Language": "en-us",
+                                "Text": "Mens Jeans"
+                            }
+                        ]
+                    },
+                    {
+                        "RecordId": "6",
+                        "Children": [],
+                        "NameTranslations": [
+                            {
+                                "Language": "en-us",
+                                "Text": "Mens Shoes"
+                            }
+                        ]
+                    },
+                    {
+                        "RecordId": "7",
+                        "Children": [],
+                        "NameTranslations": [
+                            {
+                                "Language": "en-us",
+                                "Text": "Pants"
+                            }
+                        ]
+                    },
+
+                    {
+                        "RecordId": "8",
+                        "Children": [],
+                        "NameTranslations": [
+                            {
+                                "Language": "en-us",
+                                "Text": "Suits & Sportcoats"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "NameTranslations": [
+                    {
+                        "Language": "en-us",
+                        "Text": "Womenswear"
+                    }
+                ],
+                "Children": [
+                    {
+                        "RecordId": "1",
+                        "Children": [],
+                        "NameTranslations": [
+                            {
+                                "Language": "en-us",
+                                "Text": "Coats"
+                            }
+                        ]
+                    },
+                    {
+                        "RecordId": "2",
+                        "Children": [],
+                        "NameTranslations": [
+                            {
+                                "Language": "en-us",
+                                "Text": "Dresses"
+                            }
+                        ]
+                    },
+                    {
+                        "RecordId": "3",
+                        "Children": [],
+                        "NameTranslations": [
+                            {
+                                "Language": "en-us",
+                                "Text": "Skirts"
+                            }
+                        ]
+                    },
+                    {
+                        "RecordId": "4",
+                        "Children": [],
+                        "NameTranslations": [
+                            {
+                                "Language": "en-us",
+                                "Text": "Sweaters"
+                            }
+                        ]
+                    },
+                    {
+                        "RecordId": "5",
+                        "Children": [],
+                        "NameTranslations": [
+                            {
+                                "Language": "en-us",
+                                "Text": "Tops"
+                            }
+                        ]
+                    },
+                    {
+                        "RecordId": "6",
+                        "Children": [],
+                        "NameTranslations": [
+                            {
+                                "Language": "en-us",
+                                "Text": "Womens Jeans"
+                            }
+                        ]
+                    },
+                    {
+                        "RecordId": "7",
+                        "Children": [],
+                        "NameTranslations": [
+                            {
+                                "Language": "en-us",
+                                "Text": "Womens Shoes"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "cmsNavItems": [
+            {
+                "text": "Contact",
+                "destinationUrl": "",
+                "ariaLabel": "Contact"
+            }
+        ]
+    },
+    "id": "NavigationMenu",
+    "config": {
+        "alignment": "left",
+        "createOverFlowMenu": true,
+        "overFlowMenuText": "More"
+    },
+    "context": {
+        "request": {
+            "query": {
+                "onum": "9234592138",
+                "email": "mockemail@fabrikam.com"
+            }
+        },
+        "actionContext": {
+            "id": "T1",
+            "requestContext": {
+                "locale": "en-us",
+                "apiSettings": {
+                    "channelId": 0
+                }
+            }
+        }
+    },
+    "typeName": "navigation-menu"
+}

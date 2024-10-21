@@ -1,0 +1,117 @@
+@import "../common/00-settings/colors";
+@import "../common/00-settings/font";
+@import "../common/01-tools/mixins";
+@import "../common/00-settings/icons";
+@import "../common/02-generic/button";
+@import "../common/00-settings/responsive-breakpoints";
+@import "../common/02-generic/form";
+
+$msv-business-partner-promotion-alert-padding: 10px;
+$msv-business-partner-promotion-alert-icon-padding: 10px;
+$msv-business-partner-promotion-submit-padding: 10px;
+$msv-business-partner-promotion-button-margin-top: 20px;
+$msv-business-partner-promotion-button-margin-right: 20px;
+$msv-alert-icon-font-size: 20px;
+
+:root {
+    // heading
+    --msv-business-partner-promotion-heading-font-color: var(--msv-font-primary-color);
+
+    // alert
+    --msv-business-partner-promotion-error-alert-bg: var(--msv-error-color);
+    --msv-business-partner-promotion-error-alert-font-color: var(--msv-font-secondary-color);
+    --msv-business-partner-promotion-error-alert-border: var(--msv-error-color);
+    --msv-business-partner-promotion-error-color: var(--msv-error-color);
+}
+
+.ms-business-partner-promotion {
+    &__heading {
+        color: var(--msv-business-partner-promotion-heading-font-color);
+    }
+
+    &__desc-heading {
+        color: var(--msv-business-partner-promotion-heading-font-color);
+    }
+
+    &__desc-container {
+        padding-top: 20px;
+        padding-bottom: 10px;
+    }
+
+    &__desc-title {
+        font-weight: bold;
+    }
+
+    &__desc-paragraph {
+        padding-top: 10px;
+    }
+
+    &__agreement {
+        display: flex;
+        padding-top: 20px;
+        padding-bottom: 10px;
+
+        &-checkbox {
+            height: 15px;
+            width: 15px;
+        }
+
+        &-text {
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        &-link {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    }
+
+    &__modal {
+        .msc-modal__body {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    }
+
+    &__submit-container {
+        padding: $msv-business-partner-promotion-submit-padding;
+
+        &-button {
+            @include primary-button();
+            margin-top: $msv-business-partner-promotion-button-margin-top;
+            margin-right: $msv-business-partner-promotion-button-margin-right;
+            text-align: center;
+            display: block;
+
+            @media (forced-colors: active) and (prefers-color-scheme: dark) {
+                border: 1px solid $msv-white;
+            }
+
+            @media (forced-colors: active) and (prefers-color-scheme: light) {
+                border: 1px solid $msv-black;
+            }
+        }
+    }
+
+    .msc-alert {
+        border-radius: 10px;
+
+        &.msc-alert-danger {
+            color: $msv-red;
+            background-color: $msv-pink;
+            padding: $msv-business-partner-promotion-alert-padding;
+        }
+
+        &.msc-alert-success {
+            @include validation-success($bg-color: $msv-success-color, $color: $msv-white);
+            padding: $msv-business-partner-promotion-alert-padding;
+            color: $msv-white;
+        }
+
+        &::before {
+            font-size: $msv-alert-icon-font-size;
+            padding: $msv-business-partner-promotion-alert-icon-padding;
+        }
+    }
+}

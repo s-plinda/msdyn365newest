@@ -1,0 +1,629 @@
+{
+	"$type": "containerModule",
+	"friendlyName": "Cart (COPY)",
+	"name": "cart",
+	"description": "Cart is used for viewing all the items added to the cart, allows user to proceed to checkout.",
+	"categories": [
+		"Purchase",
+		"Shopping bag"
+	],
+	"dataActions": {
+		"storeSelectorStateManager": {
+			"path": "@msdyn365-commerce-modules/bopis-utilities/dist/lib/store-selector-state-manager/store-selector-state-manager-data-action",
+			"runOn": "client"
+		},
+		"cart": {
+			"path": "@msdyn365-commerce/global-state/dist/lib/data-actions/cart-state-data-action",
+			"runOn": "server"
+		},
+		"customerBalances": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-customer-balance",
+			"runOn": "server"
+		},
+		"products": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-products-in-active-cart",
+			"runOn": "server"
+		},
+		"orgUnitLocations": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/search-org-unit-locations",
+			"runOn": "server"
+		},
+		"wishlists": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-wishlist-by-customer-id",
+			"runOn": "client"
+		},
+		"wishlistItems": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-items-in-wishlist",
+			"runOn": "client"
+		},
+		"productAvailabilites": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-availabilities-cartlines",
+			"runOn": "server"
+		},
+		"deliveryOptions": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-delivery-options-for-cartlines",
+			"runOn": "server"
+		},
+		"customerInformation": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-customer"
+		},
+		"featureState": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-feature-state",
+			"runOn": "server"
+		},
+		"orderTemplates": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/order-templates/get-order-templates-preview",
+			"runOn": "client"
+		},
+		"channelDeliveryOptionConfig": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-channel-delivery-option-configuration",
+			"runOn": "server"
+		},
+		"catalogs": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-catalogs",
+			"runOn": "server"
+		},
+		"cartLinesPickUpOptions": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-pickup-options-for-cartlines",
+			"runOn": "server"
+		},
+		"cartConfiguration": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-cart-configuration",
+			"runOn": "server"
+		}
+	},
+	"config": {
+		"showOutOfStockErrors": {
+			"friendlyName": "Show out of stock errors",
+			"description": "Shows error messages when items are out of stock or the quantity exceeds the stock",
+			"type": "boolean"
+		},
+		"showShippingChargesForLineItems": {
+			"friendlyName": "Show shipping charges for line items",
+			"description": " If shipping charges are available at the line level when the item is on the cart, display the charges",
+			"type": "boolean",
+			"default": false
+		},
+		"imageSettings": {
+			"friendlyName": "Cart line item image settings",
+			"description": "Image settings for cart line item",
+			"type": "imageSettings"
+		},
+		"showAvailablePromotions": {
+			"friendlyName": "Show available promotions",
+			"description": "This allow you to see all the promotions available for the items in the cart.",
+			"type": "boolean",
+			"default": false
+		},
+		"clientRender": {
+			"friendlyName": "Render module client side",
+			"description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
+			"type": "boolean",
+			"default": false
+		},
+		"showGuestCheckoutButton": {
+			"friendlyName": "Show guest checkout button",
+			"description": "This allows user to see 'Guest Checkout' button on cart page. For the B2B checkout, we should hide the 'Guest Checkout' button.",
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"resources": {
+		"pickUpAtStoreWithLocationText": {
+			"comment": "Text for pick up at store checkbox when location is specified",
+			"value": "Pick up at a store"
+		},
+		"bopisSelectAStore": {
+			"comment": "Header for BOPIS (Buy Online Pickup In Store) dialog",
+			"value": "Select A Store"
+		},
+		"orLabel": {
+			"comment": "The label that shows up between the guest checkout button and the signed-in checkout button, when the application is in an anonymous user state",
+			"value": "OR"
+		},
+		"backToShopping": {
+			"comment": "Back to shopping label",
+			"value": "Back to shopping"
+		},
+		"outOfStockErrorMessageHeader": {
+			"comment": "Display text for Out of stock error message",
+			"value": "There are some issues."
+		},
+		"outOfStockErrorMessage": {
+			"comment": "Display text for Out of stock error message",
+			"value": "This product is no longer available. Please remove it from the bag."
+		},
+		"errorMessageOutOfRangeOneLeft": {
+			"value": "There is only one product left. Please choose quantity within the available range",
+			"comment": "Error message to show when quantity selected is more than the quantity left, and only one product is left"
+		},
+		"errorMessageOutOfRangeFormat": {
+			"value": "There are only {numLeft} products left. Please choose quantity within the available range",
+			"comment": "Error message to show when quantity selected is more than the quantity left. {numLeft} is the number of products left."
+		},
+		"cartTitle": {
+			"comment": "Cart title",
+			"value": "Shopping bag"
+		},
+		"emptyCartText": {
+			"comment": "Text for the empty cart",
+			"value": "Your cart is empty."
+		},
+		"failToGetCartText": {
+			"comment": "Text for fail to get cart",
+			"value": "Unable to get cart!"
+		},
+		"removeCartButtonText": {
+			"comment": "Text for the remove button",
+			"value": "Remove"
+		},
+		"cartRemoveButtonAriaLabel": {
+			"comment": "Aria label for the remove button",
+			"value": "Remove {productName}"
+		},
+		"pickUpAtStoreText": {
+			"comment": "Text for pick up at store checkbox",
+			"value": "Pick up at a store "
+		},
+		"pickUpText": {
+			"comment": "Text for pick up group heading",
+			"value": "Pickup"
+		},
+		"shippingText": {
+			"comment": "Text for shipping group heading",
+			"value": "Shipping"
+		},
+		"emailshippingText": {
+			"comment": "Text for shipping group heading",
+			"value": "Email"
+		},
+		"waitingClass": {
+			"comment": "CSS class for the waiting class",
+			"value": "waiting waiting-circular waiting-lg"
+		},
+		"decrementButtonAriaLabel": {
+			"comment": "Aria label for the quantity decrease button",
+			"value": "Press to decrease the quantity by 1"
+		},
+		"incrementButtonAriaLabel": {
+			"comment": "Aria label for the quantity increment button",
+			"value": "Press to increment quantity by 1"
+		},
+		"inputQuantityAriaLabel": {
+			"comment": "Aria label for the input quantity",
+			"value": "quantity input"
+		},
+		"discountStringText": {
+			"comment": "string for showing discount off",
+			"value": "Discount "
+		},
+		"saveForLaterText": {
+			"comment": "string to save for later text",
+			"value": "Move to Wishlist"
+		},
+		"nameOfWishlist": {
+			"comment": "string for name of the wishlist",
+			"value": "My Wishlist"
+		},
+		"productDimensionTypeColor": {
+			"comment": "String that corresponds to the Color Product Dimension Type (1)",
+			"value": "Color"
+		},
+		"productDimensionTypeSize": {
+			"comment": "String that corresponds to the Size Product Dimension Type (3)",
+			"value": "Size"
+		},
+		"productDimensionTypeStyle": {
+			"comment": "String that corresponds to the Style Product Dimension Type (4)",
+			"value": "Style"
+		},
+		"productDimensionTypeAmount": {
+			"comment": "String that corresponds to the Style Product Dimension Type (4) for gift card product.",
+			"value": "Amount"
+		},
+		"productDimensionTypeConfiguration": {
+			"comment": "String that corresponds to the Style Product Dimension Configuration (2)",
+			"value": "Configuration"
+		},
+		"shipInsteadDisplayText": {
+			"comment": "String that corresponds to the ship instead display text",
+			"value": "Ship this item"
+		},
+		"changeStoreDisplayText": {
+			"comment": "String that corresponds to the change store display text",
+			"value": "Change store"
+		},
+		"quantityDisplayText": {
+			"comment": "String that corresponds to the quantity display text",
+			"value": "Quantity"
+		},
+		"shipToAddressDisplayText": {
+			"comment": "String that corresponds to the ship it to an address display text",
+			"value": "Ship to an address"
+		},
+		"pickItUpDisplayText": {
+			"comment": "String that corresponds to the pick it up display text",
+			"value": "Pick this up"
+		},
+		"payInvoicesDisplayText": {
+			"comment": "String that corresponds to the pay invoices display text",
+			"value": "Pay Invoices"
+		},
+		"totalSavingsText": {
+			"comment": "String that corresponds to the total savings display text",
+			"value": "Savings"
+		},
+		"originalPriceText": {
+			"comment": "String that corresponds to the original price screen reader text",
+			"value": "Original price"
+		},
+		"currentPriceText": {
+			"comment": "String that corresponds to the current price screen reader text",
+			"value": "Current price"
+		},
+		"cartLoadingErrorMessage": {
+			"comment": "String that corresponds to the error message that is shown when essential data actions fail",
+			"value": "Sorry we are unable to load your cart at this moment, please try again later."
+		},
+		"orderSummaryTitle": {
+			"comment": "Order summary title",
+			"value": "Order summary"
+		},
+		"invoiceSummaryTitle": {
+			"comment": "Invoice summary title",
+			"value": "Payment summary"
+		},
+		"invoiceLabel": {
+			"comment": "Invoice summary line label",
+			"value": "Invoice {0}"
+		},
+		"itemsWithCountLabel": {
+			"comment": "Items with count label",
+			"value": "Subtotal "
+		},
+		"estimatedShippingLabel": {
+			"comment": "Label of shipping",
+			"value": "Estimated Shipping"
+		},
+		"shippingCharges": {
+			"comment": "String associated with shipping charges line display text",
+			"value": "Shipping charges"
+		},
+		"priceFree": {
+			"comment": "Free price text",
+			"value": "Free"
+		},
+		"estimatedTaxLabel": {
+			"comment": "Label of estimated tax",
+			"value": "Estimated Tax"
+		},
+		"totalAmountLabel": {
+			"comment": "Label of total amount",
+			"value": "Amount due "
+		},
+		"totalSavings": {
+			"comment": "String associated with Total Savings display text",
+			"value": "Total savings "
+		},
+		"conditionsText": {
+			"comment": "String associated with Legal disclaimer for order total display text",
+			"value": "*Before applicable taxes"
+		},
+		"yetToBeCalculatedText": {
+			"comment": "String associated with to be calculated display text",
+			"value": "To be calculated"
+		},
+		"orderTotal": {
+			"comment": "String associated with order total line display text",
+			"value": "Total"
+		},
+		"otherCharges": {
+			"comment": "String associated with other charge line display text",
+			"value": "Other charges"
+		},
+		"notApplicationForCartOrderSummary": {
+			"comment": "String associated with order total line display text",
+			"value": "Not applicable"
+		},
+		"totalDiscountsLabel": {
+			"comment": "Label of total discounts",
+			"value": "Total discounts"
+		},
+		"guestCheckoutButtonTitle": {
+			"comment": "Label for guest checkout button",
+			"value": "Guest Checkout"
+		},
+		"checkoutButtonTitle": {
+			"comment": "Label for checkout button",
+			"value": "Checkout"
+		},
+		"backToShoppingButtonTitle": {
+			"comment": "Label for back to shopping button",
+			"value": "Back to shopping"
+		},
+		"addToWishlistButtonText": {
+			"comment": "Label for Move to wishlist button",
+			"value": "Move to wishlist"
+		},
+		"removeFromWishlistButtonText": {
+			"comment": "Label for Remove from wishlist button",
+			"value": "Remove from wishlist"
+		},
+		"defaultWishlistName": {
+			"comment": "Label for Default wishlist",
+			"value": "My wishlist"
+		},
+		"promoCodeHeadingText": {
+			"comment": "Heading text for promo code",
+			"value": "Promo code"
+		},
+		"promoPlaceholderText": {
+			"comment": "Promo code placeholder text",
+			"value": "Enter a promo code"
+		},
+		"promoCodeApplyButtonText": {
+			"comment": "Promo code apply button text",
+			"value": "Apply"
+		},
+		"removePromoAriaLabelFormat": {
+			"comment": "Promo aria label format",
+			"value": "{0} {1}"
+		},
+		"removePromoText": {
+			"comment": "Promo code remove button text",
+			"value": "Remove"
+		},
+		"appliedPromoCodeHeadingText": {
+			"comment": "header for applied promo code",
+			"value": "Applied promo codes"
+		},
+		"invalidPromoCodeErrorText": {
+			"comment": "To show invalid promo code message",
+			"value": "Invalid promo code"
+		},
+		"failedToAddPromoCodeErrorText": {
+			"comment": "To show message on fail to add promo code",
+			"value": "Failed to add promo code"
+		},
+		"failedToRemovePromoCodeErrorText": {
+			"comment": "To show message on fail to add promo code",
+			"value": "Failed to remove promo code"
+		},
+		"duplicatePromotionErrorText": {
+			"comment": "Text to be shown when adding a duplicate promotion code",
+			"value": "Promo code already applied"
+		},
+		"createOrderTemplateFromCartButton": {
+			"comment": "Label for creating template from cart button",
+			"value": "Save all items to order template"
+		},
+		"createOrderTemplateFromCartButtonTooltip": {
+			"comment": "Tooltip for disabled creating template from cart button",
+			"value": "Products on this shopping bag cannot be added to order template due to custom pricing"
+		},
+		"addToOrderTemplateButtonTooltip": {
+			"comment": "Tooltip for disabled add to order template button",
+			"value": "This product cannot be added to order template due to custom pricing"
+		},
+		"createOrderTemplateHeader": {
+			"value": "Create an order template",
+			"comment": "Text for create order template dialog header"
+		},
+		"orderTemplateTitle": {
+			"value": "Order template title",
+			"comment": "Text for create order template dialog title"
+		},
+		"orderTemplateNameAriaLabel": {
+			"value": "Order template title",
+			"comment": "Text for create order template dialog template name input aria label"
+		},
+		"createOrderTemplateDescription": {
+			"value": "Order templates will be saved to your account. You can reuse them in the future to speed up the checkout process. Create an order template and add this item to it.",
+			"comment": "Text for create order template dialog description"
+		},
+		"createNewOrderTemplateButtonText": {
+			"value": "Create new",
+			"comment": "Text for create order template dialog create new button"
+		},
+		"createOrderTemplateButtonText": {
+			"value": "Create",
+			"comment": "Text for create order template dialog create button"
+		},
+		"cancelNewOrderTemplateCreationButtonText": {
+			"value": "Cancel",
+			"comment": "Text for create order template dialog cancel button"
+		},
+		"defaultOrderTemplateName": {
+			"value": "Untitled",
+			"comment": "Text for create order template dialog default order template name"
+		},
+		"addToOrderTemplateHeader": {
+			"value": "Add to order template",
+			"comment": "Text for add to order template dialog header"
+		},
+		"noOrderTemplatesMessage": {
+			"value": "You have not created any order templates.",
+			"comment": "Text for add to order template dialog message"
+		},
+		"noOrderTemplatesDescription": {
+			"value": "Order templates will be saved to your account. You can reuse them in the future to speed up the checkout process. Create an order template and add this item to it.",
+			"comment": "Text for add to order template dialog description"
+		},
+		"createAnOrderTemplateButtonText": {
+			"value": "Create an order template",
+			"comment": "Text for creating an order template button"
+		},
+		"cancelOrderTemplateCreationButtonText": {
+			"value": "Cancel",
+			"comment": "Text for canceling adding to order template dialog"
+		},
+		"selectTemplatesText": {
+			"value": "Select a template or create a new one. You have {0} template(s).",
+			"comment": "Text for add to order template dialog description"
+		},
+		"addToTemplateButtonText": {
+			"value": "Add to template",
+			"comment": "Text for add to order template dialog button"
+		},
+		"lineItemsText": {
+			"value": "{0} line item(s)",
+			"comment": "Text for add to order template dialog order template description"
+		},
+		"addToOrderTemplateButtonText": {
+			"value": "Add to order template",
+			"comment": "Text for add to order template button"
+		},
+		"addToOrderTemplateMessage": {
+			"value": "Added to your order template",
+			"comment": "Text for showing for adding item to your order template message"
+		},
+		"addItemToOrderTemplateError": {
+			"value": "Unable to add item to order template",
+			"comment": "For showing error message on adding item to order template"
+		},
+		"viewOrderTemplateButtonText": {
+			"value": "View order template",
+			"comment": "View order template text on item added to order template dialog"
+		},
+		"continueShoppingButtonText": {
+			"value": "Continue shopping",
+			"comment": "Continue shopping on item added to order template dialog"
+		},
+		"linesAddedToOrderTemplateHeaderItemsOneText": {
+			"value": "1 line item",
+			"comment": "View order template text on cart added to order template dialog"
+		},
+		"linesAddedToOrderTemplateHeaderItemsFormatText": {
+			"value": "{0} line items",
+			"comment": "View order template text on cart added to order template dialog"
+		},
+		"linesAddedToOrderTemplateHeaderLinesOneText": {
+			"value": "1 line",
+			"comment": "View order template text on cart added to order template dialog"
+		},
+		"linesAddedToOrderTemplateHeaderLinesFormatText": {
+			"value": "{0} lines",
+			"comment": "View order template text on cart added to order template dialog"
+		},
+		"linesAddedToOrderTemplateHeaderMessageText": {
+			"value": " added to order template",
+			"comment": "View order template text on cart added to order template dialog"
+		},
+		"linesAddedToOrderTemplateCustomPriceAlertMessageText": {
+			"value": "The following products cannot be added to order template due to custom pricing",
+			"comment": "Alert message for adding custom price product from cart to order template dialog"
+		},
+		"itemAddedToOrderTemplateHeaderItemOneText": {
+			"value": "1 item",
+			"comment": "View order template text on item added to order template dialog"
+		},
+		"itemAddedToOrderTemplateHeaderItemFormatText": {
+			"value": "{0} items",
+			"comment": "View order template text on item added to order template dialog"
+		},
+		"itemAddedToOrderTemplateHeaderMessageText": {
+			"value": " added to order template",
+			"comment": "View order template text on item added to order template dialog"
+		},
+		"freePriceText": {
+			"value": "FREE",
+			"comment": "View order template text on item added to order template dialog"
+		},
+		"duplicatedProductsHeader": {
+			"value": "Duplicated products",
+			"comment": "Error dialog header when order template already has the same item added"
+		},
+		"duplicatedProductsDescription": {
+			"value": "This product has been added to the selected order template in the past. Do you want to update the product quantity in the order template?",
+			"comment": "Error dialog description when order template already has the same item added"
+		},
+		"updateQuantityButtonText": {
+			"value": "Yes, update quantity",
+			"comment": "Error dialog cancel button text when order template already has the same item added"
+		},
+		"cancelDuplicateItemsButtonText": {
+			"value": "Cancel",
+			"comment": "Error dialog override quantity button text when order template already has the same item added"
+		},
+		"promotionStringHeading": {
+			"value": "We found offers available based on the items on the cart.",
+			"comment": "Text to be displayed in the promotion banner"
+		},
+		"promotionLinkText": {
+			"value": "See all",
+			"comment": "Text to be displayed in the link that opens the promotion"
+		},
+		"promotionPopupHeading": {
+			"value": "Available Promotions",
+			"comment": "Text to be displayed in the heading of the promotion popup"
+		},
+		"promotionCloseButtonAriaLabel": {
+			"value": "Close",
+			"comment": "Aria label for the promotion popup close button"
+		},
+		"itemLabel": {
+			"comment": "Item label",
+			"value": "item"
+		},
+		"itemsLabel": {
+			"comment": "Items label",
+			"value": "items"
+		},
+		"titleSeparate": {
+			"comment": "Title Separator",
+			"value": ","
+		},
+		"priceEditorInputAriaLabel": {
+			"value": "Enter invoice amount to pay",
+			"comment": "Aria label for price editor in cart lines"
+		},
+		"specifyAmountButtonText": {
+			"value": "Specify amount",
+			"comment": "Specify amount button text for price editor"
+		},
+		"payFullAmountButtonText": {
+			"value": "Pay full amount",
+			"comment": "Pay full amount button text for price editor"
+		},
+		"salesAgreementPricePrompt": {
+			"value": "Contract price applied",
+			"comment": "Prompt message in cart lines."
+		},
+		"checkoutBlockedDueToUnavailableFundsTitle": {
+			"value": "No funds available",
+			"comment": "Title of message to be shown when an employee working on behalf of customer is warned that the current cart cannot be checked out."
+		},
+		"checkoutBlockedDueToUnavailableFundsMessage": {
+			"value": "To enable checkout, work with the Business partner to ensure funds have been allocated to this account.",
+			"comment": "Text of message to be shown when an employee working on behalf of customer is warned that the current cart cannot be checked out."
+		}
+	},
+	"slots": {
+		"storeSelector": {
+			"friendlyName": "Store selector",
+			"description": "Store Selector to use with the Find In Store component",
+			"max": 1,
+			"min": 0,
+			"allowedTypes": [
+				"store-selector"
+			],
+			"allowedCategories": [
+				"cart_storeSelector"
+			]
+		},
+		"paymentExpress": {
+			"friendlyName": "Payment express",
+			"description": "Allows user to do express checkout with preferred payment.",
+			"max": 4,
+			"min": 0,
+			"allowedTypes": [
+				"checkout-apple-pay",
+				"checkout-express",
+				"text-block"
+			],
+			"allowedCategories": [
+				"cart_paymentExpress"
+			]
+		}
+	}
+}
