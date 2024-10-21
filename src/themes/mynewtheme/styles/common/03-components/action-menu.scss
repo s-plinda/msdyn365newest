@@ -1,0 +1,73 @@
+@import "../00-settings/index";
+@import "../01-tools/index";
+@import "../02-generic/index";
+
+// msc-action-menu-actions-container
+$msc-action-menu-actions-container-border-radius: 4px;
+// msc-action-menu-actions-container-button
+$msc-action-menu-actions-container-button-height: 52px;
+$msc-action-menu-actions-container-button-padding: 0 8px;
+$msc-action-menu-actions-container-button-margin-right: 12px;
+
+.msc-action-menu {
+    position: relative;
+
+    &__action-toggle {
+        @include add-icon($msv-Ellipses-V);
+
+        background-color: transparent;
+        color: $msv-primary;
+
+        &-active,
+        &:active {
+            background-color: $msv-selected-button-background;
+        }
+
+        &:hover {
+            background-color: $msv-selected-hovered-button-background;
+        }
+
+        @media screen and (max-width: $msv-breakpoint-l - 1) {
+            outline: none;
+        }
+    }
+
+    &__actions-container {
+        align-items: flex-start;
+        background: $msv-white;
+        border-radius: $msc-action-menu-actions-container-border-radius;
+        box-shadow: 0 3.2px 7.2px rgba(0, 0, 0, 0.132), 0 0.6px 1.8px rgba(0, 0, 0, 0.108);
+        flex-direction: column;
+        height: auto;
+        padding-left: 0;
+        position: absolute;
+        right: 0;
+        z-index: 10;
+        min-width: 150px;
+
+        @media screen and (max-width: $msv-breakpoint-l - 1) {
+            width: 100%;
+        }
+
+        .msc-btn {
+            background: none;
+            border: none;
+            height: $msc-action-menu-actions-container-button-height;
+            padding: $msc-action-menu-actions-container-button-padding;
+            text-align: left;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+
+            &:hover {
+                background-color: $msv-gray-100;
+                text-decoration: none;
+            }
+
+            &:disabled, &[disabled] {
+                color: $msv-gray-600;
+            }
+        }
+    }
+}

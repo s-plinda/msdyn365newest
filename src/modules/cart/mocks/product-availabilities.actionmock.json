@@ -1,0 +1,8 @@
+{
+    "CacheObjectType": "PRODUCTAVAILABLEQUANTITY",
+    "CacheKey": "*",
+    "Mock": [
+        { "__mock": true, "ProductId": 22565430663, "AvailableQuantity": -5, "UnitOfMeasure": null, "ExtensionProperties": [] },
+        { "__mock": true, "ProductId": 22565430661, "AvailableQuantity": -2, "UnitOfMeasure": null, "ExtensionProperties": [] }
+    ]
+}

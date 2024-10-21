@@ -1,0 +1,32 @@
+{
+	"id": "CheckoutModule_1",
+	"config": {
+		"checkoutHeading": "Checkout"
+	},
+	"data": {
+		"heading": {
+			"text": "Shop essentials"
+		},
+		"checkoutInformationHeadings": [
+			{
+				"text": "Checkout Text",
+				"headingTag": "headingTag1",
+				"textSize": "sm"
+			},
+			{
+				"text": "Checkout Text12",
+				"headingTag": "headingTag25",
+				"textSize": "lg"
+			}
+		]
+	},
+	"typeName": "checkout",
+	"modules": {
+		"cartSummary": [
+			{
+				"id": "banner",
+				"typeName": "banner"
+			}
+		]
+	}
+}

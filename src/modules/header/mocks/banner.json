@@ -1,0 +1,43 @@
+{
+    "data": {
+        "heading": {
+            "text": "Shop essentials"
+        },
+        "paragraph":{
+            "text": "<p>Paragraph text. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+        },
+        "backgroundImage": {
+            "title": "Shop essentials",
+            "href": "https://img-prod-cms-mr-microsoft-com.akamaized.net/cms/api/fabrikam/imageFileData/MA1QsS",
+            "alttext": "Mixed reality"
+        },
+        "links": [
+            {
+                "text": "Shop now",
+                "destinationUrl": "https://www.microsoft.com/en-us/hololens/apps",
+                "type": "success",
+                "altText": null,
+                "ariaLabel": "Shop now",
+                "image": null,
+                "openInNewTab" : true
+            },
+            {
+                "text": "View More",
+                "destinationUrl": "https://www.microsoft.com/en-us/hololens/apps",
+                "type": "success",
+                "altText": null,
+                "ariaLabel": "Shop now",
+                "image": null,
+                "openInNewTab" : false
+            }
+        ]
+    },
+    "config": {
+        "alignment": "",
+        "lazyload": false,
+        "bannerTheme": "darkTheme",
+        "backgroundColor": ""
+    },
+    "id": "BannerModule_1",
+    "typeName": "banner"
+}

@@ -1,0 +1,153 @@
+{
+	"$type": "containerModule",
+	"friendlyName": "Product collection (COPY)",
+	"name": "product-collection",
+	"description": "Product collection shows a list of products based on recommendations, relation types and category.",
+	"categories": [
+		"Products",
+		"Recommendations"
+	],
+	"dataActions": {
+		"featureState": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-feature-state",
+			"runOn": "server"
+		}
+	},
+	"tags": [
+		""
+	],
+	"config": {
+		"productCollection": {
+			"friendlyName": "Products",
+			"description": "Configure settings to choose appropriate data source & inputs for product collection",
+			"type": "productList",
+			"required": true
+		},
+		"heading": {
+			"friendlyName": "Heading",
+			"description": "Module heading",
+			"$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading"
+		},
+		"layout": {
+			"friendlyName": "Display style",
+			"description": "Flag to show all products in a grid layout instead of carousel",
+			"type": "string",
+			"enum": {
+				"carousel": "carousel",
+				"grid": "grid"
+			},
+			"default": "carousel",
+			"scope": "module"
+		},
+		"allowBackNavigation": {
+			"friendlyName": "Allow back on PDP",
+			"description": "If set to true, back link will be displayed on PDP breadcrumb",
+			"type": "boolean",
+			"default": false,
+			"scope": "module"
+		},
+		"imageSettings": {
+			"friendlyName": "Image settings",
+			"description": "Image settings for product items",
+			"type": "imageSettings"
+		},
+		"clientRender": {
+			"friendlyName": "Render module client side",
+			"description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.. It supercedes Image lazy load settings for the module.",
+			"type": "boolean",
+			"default": false
+		},
+		"enableAffiliationBasedPricing": {
+			"friendlyName": "Show affiliation prices",
+			"description": "Displays affiliation price when a user with one or more affiliation browses the list",
+			"type": "boolean",
+			"default": false,
+			"scope": "module"
+		},
+		"shouldDisplaySeeAllButton": {
+			"friendlyName": "Show see all button",
+			"description": "Displays see all button when enabled",
+			"type": "boolean",
+			"default": false,
+			"scope": "module"
+		},
+		"className": {
+			"friendlyName": "Custom CSS class name",
+			"description": "Provide a custom css class name defined in the theme pack to target the CSS for this module",
+			"type": "string",
+			"default": ""
+		}
+	},
+	"resources": {
+		"priceFree": {
+			"value": "Free",
+			"comment": "Text to show when product is free"
+		},
+		"priceRangeSeparator": {
+			"value": " - ",
+			"comment": "Separator when showing price range"
+		},
+		"ratingAriaLabel": {
+			"value": "Average {0} of {1} stars",
+			"comment": "Text to show for rating aria label"
+		},
+		"flipperNext": {
+			"value": "Next",
+			"comment": "value for next flipper control"
+		},
+		"flipperPrevious": {
+			"value": "Previous",
+			"comment": "Value for previous flipper control"
+		},
+		"originalPriceText": {
+			"comment": "String that corresponds to the original price screen reader text",
+			"value": "Original price"
+		},
+		"currentPriceText": {
+			"comment": "String that corresponds to the current price screen reader text",
+			"value": "Current price"
+		},
+		"ratingCountAriaLabel": {
+			"value": "{0} users rated this product.",
+			"comment": "The aria label used for the number of ratings made for this product"
+		},
+		"ratingCountAriaLabelSingleUser": {
+			"value": "{0} user rated this product.",
+			"comment": "The aria label used for the single rating made for this product"
+		},
+		"seeAllButtonText": {
+			"value": "See all",
+			"comment": "See all button text"
+		},
+		"noProductToRenderText": {
+			"value": "No promotional products available.",
+			"comment": "No promotional products available to the selected discounts"
+		}
+	},
+	"slots": {
+		"quickview": {
+			"friendlyName": "Quick view button",
+			"description": "This the slot for the quick view button on product card",
+			"max": 1,
+			"min": 0,
+			"allowedTypes": [
+				"quickview"
+			],
+			"allowedCategories": [
+				"quickview"
+			]
+		},
+		"productComparisonButton": {
+			"friendlyName": "Product comparison button",
+			"description": "This the slot for the product comparison button on product card",
+			"max": 1,
+			"min": 0,
+			"allowedTypes": [
+				"product-comparison-button"
+			],
+			"allowedCategories": [
+				"product-comparison-button"
+			]
+		}
+	}
+}

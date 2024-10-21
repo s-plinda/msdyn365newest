@@ -1,0 +1,89 @@
+@import "../00-settings/index";
+@import "../01-tools/index";
+@import "../02-generic/index";
+
+$msc-search-bar-options-width: 180px;
+$msc-search-bar-icon-width: 48px;
+$msc-search-bar-icon-color: $msv-white;
+$msc-search-bar-icon-font-size: 24px;
+
+//style presets
+:root {
+    // secondary button
+    --msv-search-bar-secondary-btn-bg: var(--msv-secondary-button-background-color);
+    --msv-search-bar-secondary-btn-font-color: var(--msv-font-primary-color);
+    --msv-search-bar-secondary-btn-border: var(--msv-accent-brand-color);
+}
+
+.msc-search-bar {
+    margin: 10px 0;
+
+    &__search-options {
+        @include form-input-el();
+
+        width: $msc-search-bar-options-width;
+        border: 1px solid $msv-gray-500;
+        vertical-align: middle;
+
+        &:focus {
+            border: 1px dashed $msv-gray-500;
+            outline: none;
+        }
+    }
+
+    &__search-text {
+        @include form-input-el();
+
+        width: calc(100% - #{$msc-search-bar-options-width} - 10px - #{$msc-search-bar-icon-width});
+        border: 1px solid $msv-gray-500;
+        vertical-align: middle;
+
+        &.full-width {
+            width: calc(100% - 10px - #{$msc-search-bar-icon-width});
+        }
+
+        &:focus {
+            border: 1px dashed $msv-gray-500;
+            outline: none;
+        }
+    }
+
+    &__search-button {
+        vertical-align: middle;
+
+        @include font-glyph-standard();
+        @include secondary-button(var(--msv-search-bar-secondary-btn-bg),
+        var(--msv-search-bar-secondary-btn-font-color), var(--msv-search-bar-secondary-btn-border));
+        color: var(--msv-search-bar-secondary-btn-border);
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        min-width: $msc-search-bar-icon-width;
+        width: $msc-search-bar-icon-width;
+        flex: 0 0 $msc-search-bar-icon-width;
+        margin-left: 10px;
+
+        &::after {
+            @include msv-icon();
+            content: $msv-Search;
+        }
+    }
+
+    @media screen and (max-width: $msv-breakpoint-m) {
+        &__search-options {
+            width: calc(100% - 10px - #{$msc-search-bar-icon-width});
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+
+        &__search-text {
+            width: calc(100% - 10px - #{$msc-search-bar-icon-width});
+            border-radius: 4px;
+            vertical-align: middle;
+        }
+
+        &__search-button {
+            vertical-align: middle;
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "CacheObjectType": "RECOMMENDEDELEMENT",
+    "CacheKey": "*",
+    "Mock": [
+        { "__mock": true, "ElementId": "22565423217", "ElementTypeValue": 1 },
+        { "__mock": true, "ElementId": "22565423456", "ElementTypeValue": 1 },
+        { "__mock": true, "ElementId": "22565430661", "ElementTypeValue": 1 },
+        { "__mock": true, "ElementId": "22565430665", "ElementTypeValue": 1 }
+    ]
+}

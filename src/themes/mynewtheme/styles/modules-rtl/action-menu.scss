@@ -1,0 +1,33 @@
+@import "../00-settings/index";
+@import "../01-tools/index";
+@import "../02-generic/index";
+
+// msc-action-menu-actions-container-button
+$rtl-msc-action-menu-actions-container-button-padding: 0 8px;
+$rtl-msc-action-menu-actions-container-button-margin-left: 12px;
+$rtl-msc-action-menu-actions-container-button-margin-right: 0;
+
+[dir="rtl"] {
+    .msc-action-menu {
+        &__actions-container {
+            box-shadow: 0 3.2px 7.2px rgba(0, 0, 0, 0.132), 0 0.6px 1.8px rgba(0, 0, 0, 0.108);
+            padding-left: 0;
+            right: auto;
+            left: 0;
+
+            @media screen and (max-width: $msv-breakpoint-l - 1) {
+                width: 100%;
+            }
+
+            .msc-btn {
+                padding: $rtl-msc-action-menu-actions-container-button-padding;
+                text-align: right;
+
+                &::before {
+                    margin-left: $rtl-msc-action-menu-actions-container-button-margin-left;
+                    margin-right: $rtl-msc-action-menu-actions-container-button-margin-right;
+                }
+            }
+        }
+    }
+}

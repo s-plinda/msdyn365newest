@@ -20,20 +20,17 @@ test('validate renderPage div render', async (testController: TestController) =>
 
 test('validate title is rendered on the page', async (testController: TestController) => {
     const pageTitle = Selector('main .ms-content-block__title');
-    await testController
-            .expect(pageTitle.exists) 
-            .eql(true, 'Could not find title on the page');
-     await testController
-            .expect(pageTitle.innerText) 
-            .eql('Heading', 'Incorrect title rendered');
+    await testController.expect(pageTitle.exists).eql(true, 'Could not find title on the page');
+    await testController.expect(pageTitle.innerText).eql('Heading', 'Incorrect title rendered');
 });
 
 test('validate pageText is rendered on the page', async (testController: TestController) => {
     const pageText = Selector('main .ms-content-block__text');
+    await testController.expect(pageText.exists).eql(true, 'Could not find page text on the page');
     await testController
-            .expect(pageText.exists) 
-            .eql(true, 'Could not find page text on the page');
-    await testController
-            .expect(pageText.innerText) 
-            .eql('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.', 'Incorrect page text rendered on the page');
+        .expect(pageText.innerText)
+        .eql(
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
+            'Incorrect page text rendered on the page'
+        );
 });

@@ -1,0 +1,47 @@
+{
+	"id": "HeaderModule",
+	"config": {
+		"renderWithContainer": true,
+		"cssOverrides": "",
+		"logoLink": {
+			"linkUrl": {
+				"destinationUrl": "/fedev",
+				"type": "externalLink"
+			}
+		},
+		"logoImage": {
+			"$type": "image",
+			"_id": "MAiIhU",
+			"src": "https://cms-ppe-imageresizer-mr.trafficmanager.net/cms/api/fabrikamsb/imageFileData/MAiIhV",
+			"altText": "fabrikam",
+			"copyright": "",
+			"binaryHash": "zsDVVIqCDbkGaw7eITavoA==",
+			"title": "Fabrikam logo",
+			"imageSettings": {
+				"quality": 80,
+				"lazyload": true,
+				"viewports": {
+					"xs": {
+						"w": 132,
+						"h": 40,
+						"q": "w=132&h=40&q=80&m=6&f=jpg"
+					},
+					"lg": {
+						"w": 160,
+						"h": 48,
+						"q": "w=160&h=48&q=80&m=6&f=jpg"
+					},
+					"xl": {
+						"w": 160,
+						"h": 48,
+						"q": "w=160&h=48&q=80&m=6&f=jpg"
+					}
+				}
+			}
+		}
+	},
+	"resources": {
+		"mobileHamburgerAriaLabel": "Menu expand to see list of Menu items"
+	},
+	"typeName": "header"
+}

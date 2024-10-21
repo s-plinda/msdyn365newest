@@ -1,0 +1,483 @@
+{
+	"$type": "containerModule",
+	"friendlyName": "Checkout (COPY)",
+	"name": "checkout",
+	"description": "Checkout captures the information needed to place an order and allows the user to place an order.",
+	"categories": [
+		"Purchase"
+	],
+	"dataActions": {
+		"checkout": {
+			"path": "@msdyn365-commerce/global-state/dist/lib/data-actions/checkout-state-data-action",
+			"runOn": "client"
+		},
+		"products": {
+			"path": "./actions/get-products-in-active-checkout-cart",
+			"runOn": "client"
+		},
+		"orgUnitLocations": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/search-org-unit-locations",
+			"runOn": "client"
+		},
+		"deliveryOptions": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-delivery-options-for-cartlines",
+			"runOn": "client"
+		},
+		"customerInformation": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-customer"
+		},
+		"channelDeliveryOptionConfig": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-channel-delivery-option-configuration",
+			"runOn": "server"
+		},
+		"featureState": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-feature-state",
+			"runOn": "server"
+		},
+		"catalogs": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-catalogs",
+			"runOn": "server"
+		},
+		"cartConfiguration": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-cart-configuration",
+			"runOn": "server"
+		}
+	},
+	"config": {
+		"checkoutHeading": {
+			"friendlyName": "Checkout heading",
+			"description": "Checkout heading",
+			"$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading"
+		},
+		"lineItemsHeading": {
+			"friendlyName": "Line items heading",
+			"description": "Line items heading",
+			"$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading"
+		},
+		"orderSummaryHeading": {
+			"friendlyName": "Order summary heading",
+			"description": "Order summary heading",
+			"$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading"
+		},
+		"showShippingChargesForLineItems": {
+			"friendlyName": "Show shipping charges for line items",
+			"description": " If shipping charges are available at the line level when the item is on the cart, display the charges",
+			"type": "boolean",
+			"default": false
+		},
+		"disableGuidedCheckoutFlow": {
+			"friendlyName": "Disable guided checkout flow",
+			"description": "Disable guided checkout flow",
+			"type": "boolean",
+			"default": false,
+			"required": false,
+			"scope": "module"
+		},
+		"imageSettings": {
+			"friendlyName": "Cart line item image settings",
+			"description": "Image settings for cart line items",
+			"type": "imageSettings"
+		},
+		"className": {
+			"friendlyName": "Custom CSS class name",
+			"description": "Provide a custom css class name defined in the theme pack to target the CSS for this module",
+			"type": "string",
+			"default": ""
+		},
+		"clientRender": {
+			"friendlyName": "Render module client side",
+			"description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
+			"type": "boolean",
+			"default": false
+		},
+		"useShippingAddressAsElectronicDeliveryInvoiceAddress": {
+			"friendlyName": "Use shipping address as electronic delivery invoice address",
+			"description": "Use shipping address to populate the electronic delivery invoice address",
+			"type": "boolean",
+			"default": false,
+			"required": false,
+			"scope": "module"
+		}
+	},
+	"resources": {
+		"checkoutStepTitleFormat": {
+			"comment": "Title of shipping address section",
+			"value": "{stepNumber}. {stepTitle}"
+		},
+		"saveBtnLabel": {
+			"comment": "Save button label",
+			"value": "Save"
+		},
+		"saveAndContinueBtnLabel": {
+			"comment": "Save and continue button label",
+			"value": "Save & continue"
+		},
+		"changeBtnLabel": {
+			"comment": "Change button label",
+			"value": "Change"
+		},
+		"cancelBtnLabel": {
+			"comment": "Cancel button label",
+			"value": "Cancel"
+		},
+		"blockedLoyaltyCardErrorMessage": {
+			"comment": "Blocked loyalty card error message",
+			"value": "The loyalty card number encountered an error. Please try a different loyalty card number or contact Customer Support for additional assistance. Reference Code: CCR018"
+		},
+		"checkoutOutOfStockErrorMessage": {
+			"comment": "Out of stock while checking out error message",
+			"value": "Some of the items do not have enough stock. Please adjust the quantity in your cart."
+		},
+		"customerCreditLimitExceededErrorMessage": {
+			"comment": "Credit limit exceeded while checking out through customer account payment method",
+			"value": "The order cannot be placed as the new account balance exceeds the credit limit. Please use another payment method, if available."
+		},
+		"checkoutTimeoutErrorMessage": {
+			"comment": "Checkout timeout error message",
+			"value": "An error occurred when processing the payment. Please contact Customer Support for additional assistance. Reference Code: CCR025"
+		},
+		"customerAccountLimitSignDifferentFromAmountDueErrorMessage": {
+			"comment": "Customer account limit sign different from amount due error message",
+			"value": "The Customer Account limit differs from the amount due. Please try a different payment method or contact Customer Support for additional assistance. Reference Code: CCR008"
+		},
+		"customerAccountPaymentExceedsAvailableCreditLimitErrorMessage": {
+			"comment": "Customer account payment exceeds available credit limit error message",
+			"value": "The order cannot be placed as the new account balance exceeds the credit limit. Please use another payment method, if available."
+		},
+		"customerAccountPaymentExceedsCustomerAccountFloorLimitErrorMessage": {
+			"comment": "Customer account payment exceeds customer account floor limit error message",
+			"value": "The Customer Account payment cannot be used for this order due to set limits. Please try a different payment method or contact Customer Support for additional assistance. Reference Code: CCR011"
+		},
+		"customerAccountPaymentExceedsTotalAmountForCarryOutAndReturnItemsErrorMessage": {
+			"comment": "Customer account payment exceeds total amount for carry out and return items error message",
+			"value": "The Customer Account payment exceeds the total due for the listed items. Please try again later or contact Customer Support for additional assistance. Reference Code: CCR009"
+		},
+		"customerAccountPaymentForCustomerWithoutAllowOnAccountErrorMessage": {
+			"comment": "Customer account payment for customer without allow on account error message",
+			"value": "The Customer Account payment cannot be used for this order due to set limits. Please try a different payment method or contact Customer Support for additional assistance. Reference Code: CCR012"
+		},
+		"customerAccountPaymentNotAllowedForOpenInvoicesErrorMessage": {
+			"comment": "Customer account payment not allowed for open invoices error message",
+			"value": "The customer account cannot be used to pay the open invoice. Please try a different payment method or contact Customer Support for additional assistance."
+		},
+		"fraudRiskErrorMessage": {
+			"comment": "Fraud risk error message",
+			"value": "An error occurred when processing the payment. Please try again later. Reference Code: CCR024"
+		},
+		"genericErrorMessage": {
+			"comment": "Generic error message",
+			"value": "Something went wrong, please try again."
+		},
+		"timeoutErrorMessage": {
+			"comment": "Please check order history to get latest status of current order message.",
+			"value": "The server is taking too long to respond. Please navigate to the order history to check if your order is created, else please try creating the order again."
+		},
+		"giftCardBalanceInquiryFailedErrorMessage": {
+			"comment": "Gift card balance inquiry failed error message.",
+			"value": "The gift card balance inquiry failed with an error."
+		},
+		"giftCardCurrencyMismatchErrorMessage": {
+			"comment": "Gift card currency mismatch error message",
+			"value": "The gift card number encountered an error. Please try a different gift card or contact Customer Support for additional assistance. Reference Code: CCR020"
+		},
+		"invalidCartVersionErrorMessage": {
+			"comment": "Invalid cart version error message",
+			"value": "A cart error occurred when processing the payment. Please refresh browser and retry. Reference Code: CCR027"
+		},
+		"invalidLoyaltyCardNumberErrorMessage": {
+			"comment": "Invalid loyalty card number error message",
+			"value": "The loyalty card number was not found. Please try a different loyalty card number or contact Customer Support for additional assistance. Reference Code: CCR017"
+		},
+		"invalidPaymentRequestConsoleErrorMessage": {
+			"comment": "Invalid payment request console error message",
+			"value": "Unable to retrieve tender service for the operation. Please check your payment method setup for this tender type."
+		},
+		"invalidPaymentRequestErrorMessage": {
+			"comment": "Invalid payment request error message",
+			"value": "An error occurred when contacting the payment gateway. Please try again later. Reference Code: CCR006"
+		},
+		"missingRequiredCartTenderLinesErrorMessage": {
+			"comment": "Missing required cart tender lines error message",
+			"value": "The payment method you are attempting has encountered an error. Please contact support to review your account settings or try again with a different payment method. Reference Code: CCR028"
+		},
+		"multipleCustomerAccountPaymentsNotAllowedErrorMessage": {
+			"comment": "Multiple customer account payments not allowed error message",
+			"value": "A customer account payment has already been used for this transaction. Please try a different payment method or contact Customer Support for additional assistance. Reference Code: CCR007"
+		},
+		"noMoreThanOneLoyaltyTenderErrorMessage": {
+			"comment": "No more than one loyalty tender error message",
+			"value": "A loyalty payment has already been used for this transaction. Please try a different payment method or contact Customer Support for additional assistance. Reference Code: CCR022"
+		},
+		"noResponseFromGatewayForGiftCardBalanceInquiryErrorMessage": {
+			"comment": "No response from gateway for gift card balance inquiry error message",
+			"value": "The payment gateway was unable to respond. Please try again later."
+		},
+		"noTenderLoyaltyCardErrorMessage": {
+			"comment": "No tender loyalty card error message",
+			"value": "The loyalty card number encountered an error. Please try a different loyalty card number or contact Customer Support for additional assistance. Reference Code: CCR019"
+		},
+		"notEnoughRewardPointsErrorMessage": {
+			"comment": "Not enough reward points error message",
+			"value": "The Loyalty payment encountered an error for this order. Please try a different payment method or contact Customer Support for additional assistance. Reference Code: CCR015"
+		},
+		"paymentAlreadyVoidedErrorMessage": {
+			"comment": "Payment already voided error message",
+			"value": "An error occurred when processing the payment. Please try again later. Reference Code: CCR023"
+		},
+		"paymentAmountExceedsGiftBalanceErrorMessage": {
+			"comment": "Payment amount exceeds gift balance error message",
+			"value": "The gift card number encountered an error. Please try a different gift card or contact Customer Support for additional assistance. Reference Code: CCR021"
+		},
+		"paymentRequiresMerchantPropertiesConsoleErrorMessage": {
+			"comment": "Payment requires merchant properties console error message",
+			"value": "Unable to make payment because of missing merchant payment properties. Contact your system administrator."
+		},
+		"paymentRequiresMerchantPropertiesErrorMessage": {
+			"comment": "Payment requires merchant properties error message",
+			"value": "An error occurred when processing the payment. Please try again later. Reference Code: CCR005"
+		},
+		"paymentUsingUnauthorizedAccountErrorMessage": {
+			"comment": "Payment using unauthorized account error message",
+			"value": "The Customer Account payment cannot be used for this order. Please try a different payment method or contact Customer Support for additional assistance. Reference Code: CCR010"
+		},
+		"refundAmountMoreThanAllowedErrorMessage": {
+			"comment": "Refund amount more than allowed error message",
+			"value": "The Loyalty refund encountered an error for this order. Please provide a different payment method or contact Customer Support for additional assistance. Reference Code: CCR016"
+		},
+		"unableToAuthorizePaymentCardAdditionalContextRequiredErrorMessage": {
+			"comment": "Unable to authorize payment card additional context required error message",
+			"value": "The payment could not be authorized. Please try again with a different card or payment method. Reference Code: CCR003"
+		},
+		"unableToAuthorizePaymentCardTypeMissingOrNotSupportedErrorMessage": {
+			"comment": "Unable to authorize payment card type missing or not supported error message",
+			"value": "The payment could not be authorized. Please try again with a different card or payment method. Reference Code: CCR001"
+		},
+		"unableToAuthorizePaymentErrorMessage": {
+			"comment": "Unable to authorize payment error message",
+			"value": "The payment could not be authorized. Please try again with a different card or payment method. Reference Code: CCR002"
+		},
+		"unableToCancelPaymentErrorMessage": {
+			"comment": "Unable to cancel payment error message",
+			"value": "The payment cannot cancel at this time. Please try again later or contact Customer Support for additional assistance. Reference Code: CCR013"
+		},
+		"unableToReadCardTokenInfoErrorMessage": {
+			"comment": "Unable to read card token info error message",
+			"value": "An error occurred when processing the payment. Please try again later. Reference Code: CCR014"
+		},
+		"unableToRetrieveCardPaymentAcceptResultErrorMessage": {
+			"comment": "Unable to retrieve card payment accept result error message",
+			"value": "An error occurred when processing the payment. Please try again later. Reference Code: CCR004"
+		},
+		"cookieConsentRequiredMessage": {
+			"comment": "Localized text for cookie consent required message",
+			"value": "Cookie consent required to load this content. See cookie banner on the page for more details."
+		},
+		"backToShopping": {
+			"comment": "Back to shopping label",
+			"value": "Back to shopping"
+		},
+		"placeOrderText": {
+			"comment": "Text for the checkout button to place the order",
+			"value": "Place order"
+		},
+		"confirmPaymentText": {
+			"comment": "Text for the checkout button to confirm payment for invoices",
+			"value": "Confirm payment"
+		},
+		"discountStringText": {
+			"comment": "String to show discount offer string",
+			"value": "Savings "
+		},
+		"discountOffStringText": {
+			"comment": "string to show discount offer string",
+			"value": "off"
+		},
+		"quantityDisplayString": {
+			"comment": "Quantity of line item",
+			"value": "Quantity"
+		},
+		"productDimensionTypeColor": {
+			"comment": "String that corresponds to the Color Product Dimension Type (1)",
+			"value": "Color"
+		},
+		"productDimensionTypeSize": {
+			"comment": "String that corresponds to the Size Product Dimension Type (3)",
+			"value": "Size"
+		},
+		"productDimensionTypeStyle": {
+			"comment": "String that corresponds to the Style Product Dimension Type (4)",
+			"value": "Style"
+		},
+		"productDimensionTypeAmount": {
+			"comment": "String that corresponds to the Style Product Dimension Type (4) for gift card product",
+			"value": "Amount"
+		},
+		"itemLabel": {
+			"comment": "Item label",
+			"value": "item"
+		},
+		"itemsLabel": {
+			"comment": "Items label",
+			"value": "items"
+		},
+		"inStorePickUpLabel": {
+			"comment": "In store pickup label",
+			"value": "In-store pickup ({count} {suffix})"
+		},
+		"multiplePickUpLabel": {
+			"comment": "Multiple Pickup Heading",
+			"value": "Pickup"
+		},
+		"shippingLable": {
+			"comment": "Shipping Heading",
+			"value": "Shipping"
+		},
+		"shippingCountCheckoutLineItem": {
+			"comment": "Shipping label",
+			"value": "Shipping ({count} {suffix})"
+		},
+		"pickUpAtStoreWithLocationText": {
+			"comment": "Text for pick up at store checkbox when location is specified",
+			"value": "Pick up at a store "
+		},
+		"emailDeliveryText": {
+			"comment": "Text for email delivery",
+			"value": "Will be delivered via email provided during checkout"
+		},
+		"editCartText": {
+			"comment": "Edit cart text",
+			"value": "Edit Cart"
+		},
+		"configString": {
+			"comment": "Configuration text",
+			"value": "Configuration"
+		},
+		"subTotalLabel": {
+			"comment": "Items with count label",
+			"value": "Subtotal"
+		},
+		"shippingLabel": {
+			"comment": "Label of shipping",
+			"value": "Shipping"
+		},
+		"otherCharges": {
+			"comment": "String associated with other charge line display text",
+			"value": "Other charges"
+		},
+		"shippingCharges": {
+			"comment": "String associated with shipping charges line display text",
+			"value": "Shipping charges"
+		},
+		"freeText": {
+			"comment": "Free price text",
+			"value": "Free"
+		},
+		"taxLabel": {
+			"comment": "Label of estimated tax",
+			"value": "Tax"
+		},
+		"loyaltyLabel": {
+			"comment": "Label of loyalty rewards",
+			"value": "Loyalty rewards"
+		},
+		"customerAccountLabel": {
+			"comment": "Label of customer credit account",
+			"value": "Customer Credit Amount "
+		},
+		"giftcardLabel": {
+			"comment": "Label of gift card",
+			"value": "Gift card"
+		},
+		"totalAmountLabel": {
+			"comment": "Label of total amount",
+			"value": "Amount due"
+		},
+		"totalSavingsLabel": {
+			"comment": "Label of total savings",
+			"value": "Total savings"
+		},
+		"orderTotalLabel": {
+			"comment": "Label for total order amount",
+			"value": "Amount Due"
+		},
+		"totalDiscountsLabel": {
+			"comment": "Label of total discounts",
+			"value": "Total discounts"
+		},
+		"toBeCalculatedText": {
+			"comment": "Label of to be calculated",
+			"value": "To be calculated"
+		},
+		"inputQuantityAriaLabel": {
+			"comment": "Aria label for the input quantity",
+			"value": "quantity input"
+		},
+		"invoiceSummaryTitle": {
+			"comment": "Invoice summary title",
+			"value": "Payment summary"
+		},
+		"invoiceLabel": {
+			"comment": "Invoice summary line label",
+			"value": "Invoice {0}"
+		},
+		"checkoutApiFailureErrorMessage": {
+			"comment": "Please check order history to get latest status of current order message.",
+			"value": "The server is taking too long to respond. Please navigate to the order history to check if your order is created, else please try creating the order again."
+		},
+		"invoiceCheckoutApiFailureErrorMessage": {
+			"comment": "Please check order history to get latest status of current invoice payment.",
+			"value": "The invoice payment cannot be confirmed. Please check the status of the invoice payment after a few minutes by navigating to the invoice list page."
+		}
+	},
+	"slots": {
+		"checkoutInformation": {
+			"friendlyName": "Checkout information",
+			"description": "This contains the checkout information like shipping address, payment instrument and etc. This content is in the left slot ",
+			"max": 10,
+			"min": 1,
+			"allowedTypes": [
+				"checkout-express",
+				"checkout-shipping-address",
+				"checkout-billing-address",
+				"checkout-guest-profile",
+				"checkout-delivery-options",
+				"checkout-gift-card",
+				"checkout-loyalty",
+				"checkout-section-container",
+				"checkout-payment-instrument",
+				"checkout-terms-and-conditions",
+				"text-block",
+				"checkout-customer-account-payment",
+				"checkout-pickup",
+				"checkout-express-payment-container"
+			],
+			"allowedCategories": [
+				"checkout_checkoutInformation"
+			]
+		},
+		"orderConfirmation": {
+			"friendlyName": "Order confirmation",
+			"description": "This module shows an order confirmation after the order is placed, using the information found in checkout state",
+			"max": 1,
+			"min": 0,
+			"allowedTypes": [
+				"checkout-order-confirmation"
+			],
+			"allowedCategories": [
+				"checkout-order-confirmation"
+			]
+		},
+		"termsAndConditions": {
+			"friendlyName": "Terms and conditions",
+			"description": "This module shows terms and condition next to Place order button",
+			"max": 1,
+			"min": 0,
+			"allowedTypes": [
+				"checkout-terms-and-conditions"
+			],
+			"allowedCategories": [
+				"checkout-terms-and-conditions"
+			]
+		}
+	}
+}

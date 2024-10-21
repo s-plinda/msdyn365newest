@@ -1,0 +1,14 @@
+{
+    "id": "AlertModule",
+    "config": {
+        "dismissEnabled": true,
+        "color": "primary",
+        "alignment": "left"
+    },
+    "data": {
+        "content": {
+            "text": "Summer 2019 collection online now!"
+        }
+    },
+    "typeName": "alert"
+}

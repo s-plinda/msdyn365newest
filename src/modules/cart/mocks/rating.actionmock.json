@@ -1,0 +1,142 @@
+{
+    "CacheObjectType": "PRODUCTRATING",
+    "CacheKey": "*",
+    "Mock": [
+        {
+            "__mock": true,
+            "ProductId": 22565423217,
+            "AverageRating": 3.8854166666666665,
+            "TotalRatings": 96,
+            "RatingDistribution": [
+                {
+                    "Rating": 1,
+                    "Count": 7,
+                    "ExtensionProperties": []
+                },
+                {
+                    "Rating": 2,
+                    "Count": 8,
+                    "ExtensionProperties": []
+                },
+                {
+                    "Rating": 3,
+                    "Count": 10,
+                    "ExtensionProperties": []
+                },
+                {
+                    "Rating": 4,
+                    "Count": 35,
+                    "ExtensionProperties": []
+                },
+                {
+                    "Rating": 5,
+                    "Count": 36,
+                    "ExtensionProperties": []
+                }
+            ],
+            "ExtensionProperties": []
+        },
+        {
+            "__mock": true,
+            "ProductId": 22565423456,
+            "AverageRating": 3.8854166666666665,
+            "TotalRatings": 112,
+            "RatingDistribution": [
+                {
+                    "Rating": 1,
+                    "Count": 7,
+                    "ExtensionProperties": []
+                },
+                {
+                    "Rating": 2,
+                    "Count": 8,
+                    "ExtensionProperties": []
+                },
+                {
+                    "Rating": 3,
+                    "Count": 10,
+                    "ExtensionProperties": []
+                },
+                {
+                    "Rating": 4,
+                    "Count": 35,
+                    "ExtensionProperties": []
+                },
+                {
+                    "Rating": 5,
+                    "Count": 36,
+                    "ExtensionProperties": []
+                }
+            ],
+            "ExtensionProperties": []
+        },
+        {
+            "__mock": true,
+            "ProductId": 22565430661,
+            "AverageRating": 3.8181818181818183,
+            "TotalRatings": 88,
+            "RatingDistribution": [
+                {
+                    "Rating": 1,
+                    "Count": 10,
+                    "ExtensionProperties": []
+                },
+                {
+                    "Rating": 2,
+                    "Count": 4,
+                    "ExtensionProperties": []
+                },
+                {
+                    "Rating": 3,
+                    "Count": 8,
+                    "ExtensionProperties": []
+                },
+                {
+                    "Rating": 4,
+                    "Count": 36,
+                    "ExtensionProperties": []
+                },
+                {
+                    "Rating": 5,
+                    "Count": 30,
+                    "ExtensionProperties": []
+                }
+            ],
+            "ExtensionProperties": []
+        },
+        {
+            "__mock": true,
+            "ProductId": 22565430665,
+            "AverageRating": 3.9743589743589745,
+            "TotalRatings": 78,
+            "RatingDistribution": [
+                {
+                    "Rating": 1,
+                    "Count": 8,
+                    "ExtensionProperties": []
+                },
+                {
+                    "Rating": 2,
+                    "Count": 4,
+                    "ExtensionProperties": []
+                },
+                {
+                    "Rating": 3,
+                    "Count": 5,
+                    "ExtensionProperties": []
+                },
+                {
+                    "Rating": 4,
+                    "Count": 26,
+                    "ExtensionProperties": []
+                },
+                {
+                    "Rating": 5,
+                    "Count": 35,
+                    "ExtensionProperties": []
+                }
+            ],
+            "ExtensionProperties": []
+        }
+    ]
+}

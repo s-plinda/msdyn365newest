@@ -1,0 +1,75 @@
+{
+	"$type": "containerModule",
+	"friendlyName": "Checkout section container (COPY)",
+	"name": "checkout-section-container",
+	"description": "Checkout section container is used to place multiple modules within a section of the checkout flow",
+	"categories": [
+		"Purchase",
+		"Payment",
+		"checkout_checkoutInformation"
+	],
+	"attributes": {
+		"private": true
+	},
+	"dataActions": {
+		"checkout": {
+			"path": "@msdyn365-commerce/global-state/dist/lib/data-actions/checkout-state-data-action",
+			"runOn": "client"
+		}
+	},
+	"config": {
+		"heading": {
+			"friendlyName": "Heading",
+			"description": "Module heading",
+			"$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading"
+		},
+		"width": {
+			"friendlyName": "Width",
+			"description": "Container can be fluid (expand edge to edge) or grid (within a grid container)",
+			"type": "string",
+			"enum": {
+				"container": "Fill container",
+				"fluid": "Fill screen"
+			},
+			"default": "fluid"
+		},
+		"className": {
+			"friendlyName": "Custom CSS class name",
+			"description": "Provide a custom css class name defined in the theme pack to target the CSS for this module",
+			"type": "string",
+			"default": ""
+		},
+		"clientRender": {
+			"friendlyName": "Render module client side",
+			"description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"slots": {
+		"primary": {
+			"friendlyName": "Primary",
+			"description": "This contains the checkout information like shipping address, payment instrument and etc. This content is in the left slot ",
+			"max": 10,
+			"min": 1,
+			"allowedCategories": [
+				"checkoutSectionContainer_primary"
+			],
+			"allowedTypes": [
+				"checkout-express",
+				"checkout-shipping-address",
+				"checkout-billing-address",
+				"checkout-guest-profile",
+				"checkout-delivery-options",
+				"checkout-gift-card",
+				"checkout-loyalty",
+				"checkout-payment-instrument",
+				"checkout-terms-and-conditions",
+				"text-block",
+				"loyalty-terms",
+				"checkout-customer-account-payment",
+				"checkout-pickup"
+			]
+		}
+	}
+}

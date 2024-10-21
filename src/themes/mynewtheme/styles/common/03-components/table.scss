@@ -1,0 +1,53 @@
+@import "../00-settings/index";
+@import "../01-tools/index";
+@import "../02-generic/index";
+
+$msv-table-header-row-height: 50px;
+
+.msc-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    &__header-cell,
+    &__row-cell {
+        text-align: left;
+        padding: 20px;
+
+        &.number {
+            text-align: right;
+        }
+
+        &.text,
+        &.amount,
+        &.date {
+            text-align: left;
+        }
+    }
+
+    &__header {
+        text-align: left;
+
+        @include divider(bottom);
+
+        &-row {
+            height: $msv-table-header-row-height;
+
+            th {
+                font-style: normal;
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 21px;
+            }
+        }
+    }
+
+    &__row {
+        height: 54px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 21px;
+
+        @include divider(bottom);
+    }
+}

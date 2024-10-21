@@ -114,6 +114,13 @@
             "default": false,
             "group": "General"
         },
+        "showAddToCartButtonOnProductPage": {
+            "friendlyName": "Show add cart button",
+            "description": "Show/hide add cart button for each item at product list page",
+            "type": "boolean",
+            "default": true,
+            "group": "Cart and checkout"
+        },
         "searchQueryStringParameter": {
             "friendlyName": "Search query string parameter",
             "description": "Query string parameter for search",
